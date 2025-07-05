@@ -73,13 +73,12 @@ Initial modeling was done using **Linear Regression** to predict HTTP timing met
 - Train-test split (80/20)
 - Simple regression modeling with `sklearn`
 - Performance**:
-  - **R² Score**: ~1.0 for Total Request Time (indicative of moderate correlation)
-  - **RMSE**: Low to moderate, depending on HTTP metric
-  - Model underfitting observed—suggesting need for non-linear techniques
+  - **R² Score**: ~1.0
+  - **RMSE**: 0
 
 ### Evaluation
 
-While the linear model provided only **moderate predictive power** (R² values varied across target metrics), results validated that **Ping loss and latency can explain some variance in HTTP degradation**. Specific agents and tests emerged as consistent underperformers.
+We have to change what we are modeling, we are modeling the addition of all the features and that's the timing total which is not very useful.
 
 This confirms the feasibility of future, more advanced modeling using:
 - Ensemble techniques (Random Forests, Gradient Boosting)
@@ -94,6 +93,10 @@ Though not deployed in this phase, recommendations are made for operational use:
 - Use model results to guide synthetic test coverage planning
 
 ## Findings
+The majority of packet loss values fall between 0% and 20%, though the distribution extends all the way to 100%, indicating occasional severe loss events or outages.
+Latency values are mostly clustered under 500 milliseconds, but the distribution stretches up to 2.5 seconds, reflecting possible network delays, retransmissions, or timeouts.
+Both packet loss and latency distributions are heavily right-skewed, meaning that most values are low but a few extreme outliers significantly increase the range.
+The correlation between the average packet loss and average latency per agent is 0.349, indicating a weak to moderate positive correlation.
 
 
 ## Future Research and Development
@@ -117,10 +120,9 @@ Though not deployed in this phase, recommendations are made for operational use:
 ## Contact Information
 
 **Author**: Indeep Kaur  
-**Program**: UC Berkeley Professional Certificate in Machine Learning and Artificial Intelligence  
-**LinkedIn**: [Your LinkedIn Profile]  
-**Email**: [your.email@example.com]  
-**GitHub**: [github.com/yourusername]
+**Program**: UC Berkeley Professional Certificate in Machine Learning and Artificial Intelligence    
+**GitHub**: https://github.com/indeep81
+
 
 
 
