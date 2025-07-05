@@ -93,11 +93,13 @@ Though not deployed in this phase, recommendations are made for operational use:
 - Use model results to guide synthetic test coverage planning
 
 ## Findings
-The majority of packet loss values fall between 0% and 20%, though the distribution extends all the way to 100%, indicating occasional severe loss events or outages.
-Latency values are mostly clustered under 500 milliseconds, but the distribution stretches up to 2.5 seconds, reflecting possible network delays, retransmissions, or timeouts.
-Both packet loss and latency distributions are heavily right-skewed, meaning that most values are low but a few extreme outliers significantly increase the range.
-The correlation between the average packet loss and average latency per agent is 0.349, indicating a weak to moderate positive correlation.
-
+- The majority of packet loss values fall between 0% and 20%, though the distribution extends all the way to 100%, indicating occasional severe loss events or outages.
+- Latency values are mostly clustered under 500 milliseconds, but the distribution stretches up to 2.5 seconds, reflecting possible network delays, retransmissions, or timeouts.
+- Both packet loss and latency distributions are heavily right-skewed, meaning that most values are low but a few extreme outliers significantly increase the range.
+- The correlation between the average packet loss and average latency per agent is 0.349, indicating a weak to moderate positive correlation.
+- For almost all timing-related metrics (Connect Time, DNS Resolution Time, Time to First Byte, Response Receive Time, SSL Handshake Time, Total Request Time, and Wait Time), the distributions are heavily right-skewed. A very large majority of requests complete with extremely fast times
+- Missing values in the HTTP dataset appear meaningful, with increasing NaNs in later timing stages (e.g., timing_total vs. timing_firstbyte) potentially indicating incomplete or failed HTTP request lifecycles.
+- The "Distribution of Throughput" shows a different pattern compared to timing metrics. While also right-skewed, the values on the x-axis are much larger (up to 3.5e7). Most throughput values are concentrated at the lower end, indicating that a large number of operations involve lower data transfer rates. However, there's a spread suggesting that some operations achieve significantly higher throughput.
 
 ## Future Research and Development
 
