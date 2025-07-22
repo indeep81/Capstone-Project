@@ -71,19 +71,13 @@ Initial modeling was done using **Linear Regression** to predict HTTP timing met
 **Techniques used**:
 - Feature scaling (MinMax)
 - Train-test split (80/20)
-- Simple regression modeling with `sklearn`
-- Performance**:
-  - **R² Score**: ~1.0
-  - **RMSE**: 0
+- Simple modeling with Zscore and IQR 
+- Advanced modeling with - XGBoost, ARIMA and Random Forest
 
 ### Evaluation
 
-We have to change what we are modeling, we are modeling the addition of all the features and that's the timing total which is not very useful.
-
-This confirms the feasibility of future, more advanced modeling using:
-- Ensemble techniques (Random Forests, Gradient Boosting)
-- Time-series forecasting (LSTM, ARIMA)
-- Multivariate anomaly detection
+Originally we were modeling with all of the features and trying to predict timing_total which was not very useful. 
+After using the advanced modeling, we can see that XGboost is the best model as ARIMA only shows stability and Random Forest overfits easily on imbalanced data.
 
 ### Deployment (Planned)
 
@@ -100,13 +94,8 @@ Though not deployed in this phase, recommendations are made for operational use:
 - For almost all timing-related metrics (Connect Time, DNS Resolution Time, Time to First Byte, Response Receive Time, SSL Handshake Time, Total Request Time, and Wait Time), the distributions are heavily right-skewed. A very large majority of requests complete with extremely fast times
 - Missing values in the HTTP dataset appear meaningful, with increasing NaNs in later timing stages (e.g., timing_total vs. timing_firstbyte) potentially indicating incomplete or failed HTTP request lifecycles.
 - The "Distribution of Throughput" shows a different pattern compared to timing metrics. While also right-skewed, the values on the x-axis are much larger (up to 3.5e7). Most throughput values are concentrated at the lower end, indicating that a large number of operations involve lower data transfer rates. However, there's a spread suggesting that some operations achieve significantly higher throughput.
-
-## Future Research and Development
-
-- Advanced modeling techniques like Ensemble techniques (Random Forests, Gradient Boosting)
-- Time-series forecasting (LSTM, ARIMA)
-- Multivariate anomaly detection
-- Identify internally if there is URL/geo-location information for the agents and tests for the HTTP data sets
+- We were able to vsiualize detect outage with statistical methods like Z-score and IQR.
+- Advanced modeling like XGBoost is recommended in this case as we got the best peformance and did not overfit the data. 
 
 ## Outline of Project
 
@@ -115,9 +104,13 @@ Though not deployed in this phase, recommendations are made for operational use:
 3. Ping Metrics Analysis (Loss & Latency)  
 4. Agent-Level Performance Visualization  
 5. HTTP Timing Analysis by Agent and Test ID  
-6. Statistical Summary and Correlation Matrix  
-7. Modeling and Prediction  
-8. Conclusion and Recommendations  
+6. Statistical Summary
+7. Dynamic Thresholding
+8. Correlation Matrix  
+9. Modeling and Prediction
+10. Time-Series Exploration
+11. Advanced Modeling 
+12. Conclusion and Recommendations  
 
 ## Contact Information
 
